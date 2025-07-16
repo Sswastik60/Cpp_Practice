@@ -14,6 +14,7 @@ int main(){
     cout << "remainder = " << a%b <<endl ;
     cout << "division = " << a/b <<endl;
     cout << "Thank you" << endl;
+    // basic calculator program
 
     return 0;
 }
