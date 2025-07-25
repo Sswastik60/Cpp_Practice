@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// Conceptual Program with double inner loops in functioning
+// Conceptual Program with double inner loops in functioning .This is a very important pattern concept
 
 int main(){
     for (int i = 1; i < 5; i++)
