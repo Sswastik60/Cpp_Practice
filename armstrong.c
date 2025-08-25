@@ -4,7 +4,7 @@
 int main(){
     int a,r,s,o;
     
-    printf("Enter a");
+    printf("Enter a =");
     scanf("%d",&a);
     s=0;
     o=a;
@@ -19,9 +19,9 @@ int main(){
     
     if (s==o)
     {
-        printf("Palindrome");
+        printf("armstrong");
     }else{
-        printf("Not Palindrome");
+        printf("Not armstrong");
     }
     
     return 0;
