@@ -10,7 +10,7 @@ int main() {
     printf("Enter number of students: ");
     scanf("%d", &N);
 
-    getchar(); // <-- Add this line to consume leftover newline
+    getchar(); // <-- Add this line to consume leftover newline very very important *****************
 
     for(i = 0; i < N; i++) {
         printf("Enter name of student %d: ", i + 1);
