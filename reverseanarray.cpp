@@ -7,7 +7,7 @@ void revArray(int arr[],int sz){
     if (sz%2==0)
     {
         while (start < end)
-        {
+         
             int temp;
             temp=arr[start];
             arr[start]=arr[end];
