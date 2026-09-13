@@ -63,6 +63,27 @@ struct node* insert_at_beginning(struct node * head,int data){
     return head;
 }
 
+void insert_at_position(struct node * head,int data,int position){
+    if(head==NULL){
+        printf("Empty list");
+    }
+    struct node *ptr ,*temp;
+    ptr=head;
+    temp = (struct node*)malloc(sizeof(struct node));
+    
+    temp->data=data;
+    temp->next=NULL;
+
+    for (int i=0;i<position-1;i++){
+        ptr=ptr->next;
+    }// reach the position where we want to insert the node
+
+    temp->next=ptr->next;
+    ptr->next=temp;
+
+    
+}
+
 int main(){
     struct node *head = NULL;
     head = (struct node*)malloc(sizeof(struct node));
@@ -90,6 +111,7 @@ int main(){
     //inserting at the beginning of sll
     head = insert_at_beginning(head, 50);
 
+    insert_at_position(head, 60, 2);
     //print data of nodes
     print_data(head);
     return 0;
