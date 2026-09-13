@@ -80,8 +80,47 @@ void insert_at_position(struct node * head,int data,int position){
 
     temp->next=ptr->next;
     ptr->next=temp;
+}
 
-    
+struct node* delete_first_node(struct node * head){
+    if(head==NULL){
+        printf("Empty list");
+    }
+    struct node *ptr = NULL;
+    ptr=head;
+    head=head->next;
+    free(ptr);
+    ptr=NULL;
+    return head;
+}
+
+void delete_last_node(struct node * head){
+    if(head==NULL){
+        printf("Empty list");
+    }
+    struct node *ptr = NULL;
+    ptr=head;
+    while(ptr->next->next!=NULL){
+        ptr=ptr->next;
+    }
+    free(ptr->next);
+    ptr->next=NULL;
+
+}
+
+void delete_at_position(struct node * head,int position){
+    if(head==NULL){
+        printf("Empty list");
+    }
+    struct node *temp = NULL;
+    temp=head;
+    for (int i=0;i<position-1;i++){
+        temp=temp->next;
+    }
+    struct node *temp2 = temp->next;
+    temp->next=temp2->next;
+    free(temp2);
+    temp2=NULL;
 }
 
 int main(){
@@ -101,10 +140,6 @@ int main(){
     current2 ->next = NULL;
     current->next=current2;//this creates the link
 
-
-    //count nodes
-    count_nodes(head);
-    
     //inserting node at end of sll
     insert_at_end(head,40);
 
@@ -112,7 +147,21 @@ int main(){
     head = insert_at_beginning(head, 50);
 
     insert_at_position(head, 60, 2);
+
+    //deleting first node
+    head = delete_first_node(head);
+
+    //deleting last node
+    delete_last_node(head);
+    
+    //deleting node at position
+    delete_at_position(head, 1);
+
+    //count number of nodes
+    count_nodes(head);
+
     //print data of nodes
     print_data(head);
+
     return 0;
 }
