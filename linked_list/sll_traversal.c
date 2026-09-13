@@ -123,6 +123,38 @@ void delete_at_position(struct node * head,int position){
     temp2=NULL;
 }
 
+void delete_list(struct node * head){
+    if(head==NULL){
+        printf("Empty list");
+    }
+    struct node *ptr = NULL;
+    ptr=head;
+    while(ptr!=NULL){
+        struct node *temp = ptr;
+        ptr=ptr->next;
+        free(temp);
+        temp=NULL;
+    }
+}
+
+struct node* reverse_list(struct node * head){
+    if(head==NULL){
+        printf("Empty list");
+    }
+    struct node *prev = NULL;
+    struct node *current = head;
+    struct node *next = NULL;
+
+    while(current!=NULL){
+        struct node *next = current->next;
+        current->next=prev;
+        prev=current;
+        current=next;
+    }
+    head=prev;
+    return head;
+}
+
 int main(){
     struct node *head = NULL;
     head = (struct node*)malloc(sizeof(struct node));
@@ -160,7 +192,16 @@ int main(){
     //count number of nodes
     count_nodes(head);
 
-    //print data of nodes
+    //printing the data of linked list before reversing
+    printf("before reversing:\n");
+    print_data(head);
+    
+
+    //reverse the linked list
+    head = reverse_list(head);
+
+    //printing the data of linked list after reversing
+    printf("after reversing:\n");
     print_data(head);
 
     return 0;
