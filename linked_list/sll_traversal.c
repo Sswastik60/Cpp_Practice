@@ -203,6 +203,6 @@ int main(){
     //printing the data of linked list after reversing
     printf("after reversing:\n");
     print_data(head);
-
+    //all single linked list operations are done 
     return 0;
 }
