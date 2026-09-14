@@ -56,8 +56,8 @@ struct node* insert_at_beginning(struct node * head,int data){
     }
     struct node *temp;
     temp = (struct node*)malloc(sizeof(struct node));
+    
     temp->data=data;
-    temp->next=NULL;
     temp->next=head;
     head=temp;
     return head;
