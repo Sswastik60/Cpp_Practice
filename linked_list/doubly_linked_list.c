@@ -59,6 +59,39 @@ void add_btw_nodes(struct node *head,int data,int pos){
     temp2->prev = new_node;
 }
 
+struct node* delete_node_at_beginning(struct node *head, int pos)
+{
+    struct node *temp = head;
+    if (head == NULL)
+    {
+        printf("List is empty\n");
+        return NULL;
+    }
+    head = head->next;
+    temp->next = NULL;
+    free(temp);
+    head->prev = NULL;
+    return head;
+}
+
+struct node* delete_node_at_end(struct node *head)
+{
+    struct node *temp = head;
+    struct node *temp2 = head;
+    if (head == NULL)
+    {
+        printf("List is empty\n");
+        return NULL;
+    }
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+    temp2 = temp->prev;
+    temp2->next = NULL;
+    free(temp);
+    return head;
+}
 void print_data(struct node *head)
 {
     if (head == NULL)
@@ -79,9 +112,14 @@ int main()
 {
     struct node *head = NULL;
     head= addToEmpty(head, 10);
-    addAtEnd(head, 20);
-    addAtEnd(head, 30);
+    head = addAtEnd(head, 20);
+    head = addAtEnd(head, 30);
     add_btw_nodes(head, 25, 2);
     print_data(head);
+    head = delete_node_at_beginning(head, 1);
+    print_data(head);
+    head = delete_node_at_end(head);
+    print_data(head);
+
     return 0;
 }
