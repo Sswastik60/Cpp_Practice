@@ -39,6 +39,25 @@ struct node* addAtEnd(struct node *head, int data)
     temp->prev = ptr;
     return head;
 }
+void add_btw_nodes(struct node *head,int data,int pos){
+    struct node *temp,*temp2;
+    struct node *new_node = (struct node*)malloc(sizeof(struct node));
+    temp = (struct node*)malloc(sizeof(struct node));
+    temp2 = (struct node*)malloc(sizeof(struct node));
+    new_node->data = data;
+    new_node->next = NULL;
+    new_node->prev = NULL;
+    while(pos!=1){
+        temp = head;
+        temp=temp->next;
+        pos--;
+    }
+    temp2 = temp->next;
+    temp->next = new_node;
+    new_node->prev = temp;
+    new_node->next = temp2;
+    temp2->prev = new_node;
+}
 
 void print_data(struct node *head)
 {
@@ -61,6 +80,8 @@ int main()
     struct node *head = NULL;
     head= addToEmpty(head, 10);
     addAtEnd(head, 20);
+    addAtEnd(head, 30);
+    add_btw_nodes(head, 25, 2);
     print_data(head);
     return 0;
 }
