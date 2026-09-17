@@ -107,13 +107,15 @@ void print_data(struct node *head)
     }
     printf("NULL\n");
 }
-
+//doubly linked list continues with add_btw_nodes, delete_node_at_beginning, delete_node_at_end, and print_data functions.
 int main()
 {
     struct node *head = NULL;
     head= addToEmpty(head, 10);
     head = addAtEnd(head, 20);
     head = addAtEnd(head, 30);
+    head = addAtEnd(head, 40);
+    head = addAtEnd(head, 50);
     add_btw_nodes(head, 25, 2);
     print_data(head);
     head = delete_node_at_beginning(head, 1);
