@@ -92,6 +92,45 @@ struct node* delete_node_at_end(struct node *head)
     free(temp);
     return head;
 }
+
+struct node *delete_node_at_position(struct node *head, int pos)
+{
+    struct node *temp = head;
+    struct node *temp2 = NULL;
+    if (head == NULL)
+    {
+        printf("List is empty\n");
+        return NULL;
+    }
+    while (pos != 1)
+    {
+        temp = temp->next;
+        pos--;
+    }
+    temp2 = temp->prev;
+    temp2->next = temp->next;
+    temp->next->prev = temp2;
+    free(temp);
+    return head;
+}
+
+struct node* reverse_dll(struct node *head)
+{
+    struct node *temp = NULL;
+    struct node *current = head;
+    while (current != NULL)
+    {
+        temp = current->prev;
+        current->prev = current->next;
+        current->next = temp;
+        current = current->prev;
+    }
+    if (temp != NULL)
+    {
+        head = temp->prev;
+    }
+    return head;
+}
 void print_data(struct node *head)
 {
     if (head == NULL)
@@ -121,6 +160,11 @@ int main()
     head = delete_node_at_beginning(head, 1);
     print_data(head);
     head = delete_node_at_end(head);
+    print_data(head);
+    head = delete_node_at_position(head, 2);
+    print_data(head);
+    //reverse the doubly linked list very important concept
+    head = reverse_dll(head);
     print_data(head);
 
     return 0;
