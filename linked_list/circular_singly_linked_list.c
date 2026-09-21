@@ -61,6 +61,50 @@ struct node * delete_at_end(struct node *tail){
     return tail;
 }//here the tail changes because we are deleting the last node of the list, so the tail now points to the second last node.
 
+struct node * delete_at_position(struct node *tail,int pos){
+    struct node *temp = tail->next;
+    struct node *p = tail;
+    while(pos>1){
+        p = temp;
+        temp = temp->next;
+        pos--;
+    }
+    p->next = temp->next;
+    free(temp);
+    return tail;
+}//here the tail never changes because we are deleting a node at a specific position in the list, so the tail remains the same.
+
+void count_nodes(struct node *tail){
+    struct node *temp = tail->next;
+    int count = 0;
+    if(tail == NULL){
+        printf("List is empty\n");
+        return;
+    }
+    do{
+        count++;
+        temp = temp->next;
+    }while(temp != tail->next);
+    printf("Number of nodes in the list: %d\n",count);
+}
+
+void search_node(struct node *tail,int key){
+    struct node *temp = tail->next;
+    int pos = 1;
+    if(tail == NULL){
+        printf("List is empty\n");
+        return;
+    }
+    do{
+        if(temp->data == key){
+            printf("Node found at position: %d\n",pos);
+            return;
+        }
+        temp = temp->next;
+        pos++;
+    }while(temp != tail->next);
+    printf("Node not found\n");
+}
 void printcsll(struct node *tail){
     struct node *temp = tail->next;
     if(tail == NULL){
@@ -82,6 +126,8 @@ int main()
     tail = add_at_beginning(tail, 45);
     printcsll(tail);
     tail = add_at_end(tail, 56);
+    tail = add_at_end(tail, 78);
+    tail = add_at_end(tail, 90);
     printcsll(tail);
     tail = insert_at_position(tail, 60, 3);
     printcsll(tail);
@@ -89,4 +135,8 @@ int main()
     printcsll(tail);
     tail = delete_at_end(tail);
     printcsll(tail);
+    tail = delete_at_position(tail, 2);
+    printcsll(tail);
+    count_nodes(tail);
+    search_node(tail, 56);
 }
