@@ -36,11 +36,14 @@ void print_polynomial(struct node *poly)
     printf("\n");
 }
 
-void addition_of_polynomial(struct node *p1, struct node *p2)
+void addition_of_polynomial(struct node *head1, struct node *head2)
 {
     struct node *result = NULL;
     struct node *tail = NULL;
     struct node *newNode;
+    
+    struct node *p1 = head1;
+    struct node *p2 = head2;
 
     while (p1 != NULL && p2 != NULL)
     {
