@@ -42,6 +42,24 @@ struct node * insert_at_position(struct node *tail,int data,int pos){
     p->next = newNode;
     return tail;
 }//here the tail never changes because we are adding the new node at a specific position in the list, so the tail remains the same.
+ 
+struct node * delete_at_beginning(struct node *tail){
+    struct node *temp = tail->next;
+    tail->next = temp->next;
+    free(temp);
+    return tail;
+}//here the tail never changes because we are deleting the first node of the list, so the tail remains the same.
+
+struct node * delete_at_end(struct node *tail){
+    struct node *temp = tail->next;
+    while(temp->next != tail){
+        temp = temp->next;
+    }
+    temp->next = tail->next;
+    free(tail);
+    tail = temp;
+    return tail;
+}//here the tail changes because we are deleting the last node of the list, so the tail now points to the second last node.
 
 void printcsll(struct node *tail){
     struct node *temp = tail->next;
@@ -66,5 +84,9 @@ int main()
     tail = add_at_end(tail, 56);
     printcsll(tail);
     tail = insert_at_position(tail, 60, 3);
+    printcsll(tail);
+    tail = delete_at_beginning(tail);
+    printcsll(tail);
+    tail = delete_at_end(tail);
     printcsll(tail);
 }
