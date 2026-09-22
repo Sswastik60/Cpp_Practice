@@ -1,4 +1,3 @@
-```c
 #include <stdio.h>
 #include <string.h>
 
@@ -24,7 +23,6 @@ int main()
 
         Convert(infix, prefix);
 
-        printf("\nInfix Expression: %s", infix);
         printf("\nPrefix Expression: %s\n", prefix);
 
         printf("\nDo you want to enter another (1/0)? ");
@@ -178,4 +176,3 @@ void Convert(char infix[], char prefix[])
     // Reverse result
     ReverseString(prefix);
 }
-```
