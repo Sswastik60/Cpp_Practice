@@ -3,7 +3,8 @@
 
 void push(char *stack, int *top, char value)
 {
-    stack[++(*top)] = value;
+    (*top)++;
+    stack[*top] = value;
 }
 
 void pop(char *stack, int *top)
@@ -16,41 +17,50 @@ int isBalanced(char *expression)
 {
     int top = -1;
     char stack[100];
+    int i;
 
-    for (int i = 0; expression[i] != '\0'; i++)
+    for (i = 0; expression[i] != '\0'; i++)
     {
         char current = expression[i];
 
+        /* Opening brackets */
         if (current == '(' || current == '{' || current == '[')
         {
             push(stack, &top, current);
         }
+
+        /* Closing brackets */
         else if (current == ')' || current == '}' || current == ']')
         {
+            /* No opening bracket available */
             if (top == -1)
-                return 0; // Unbalanced
+                return 0;
 
             char last = stack[top];
-            pop(stack, &top);
 
+            /* Check matching pair BEFORE popping */
             if ((current == ')' && last != '(') ||
                 (current == '}' && last != '{') ||
                 (current == ']' && last != '['))
             {
-                return 0; // Unbalanced
+                return 0;
             }
+
+            pop(stack, &top);
         }
     }
 
-    return top == -1; // Balanced if stack is empty
+    /* Stack must be empty */
+    return top == -1;
 }
+
 
 int main()
 {
     char expression[100];
 
     printf("Enter an expression: ");
-    scanf("%s", expression);
+    scanf("%99s", expression);
 
     if (isBalanced(expression))
         printf("The expression is balanced.\n");
