@@ -1,6 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void push(char *stack, int *top, char value)
+{
+    stack[++(*top)] = value;
+}
+
+void pop(char *stack, int *top)
+{
+    if (*top != -1)
+        (*top)--;
+}
+
 int isBalanced(char *expression)
 {
     int top = -1;
@@ -12,14 +23,15 @@ int isBalanced(char *expression)
 
         if (current == '(' || current == '{' || current == '[')
         {
-            stack[++top] = current;
+            push(stack, &top, current);
         }
         else if (current == ')' || current == '}' || current == ']')
         {
             if (top == -1)
                 return 0; // Unbalanced
 
-            char last = stack[top--];
+            char last = stack[top];
+            pop(stack, &top);
 
             if ((current == ')' && last != '(') ||
                 (current == '}' && last != '{') ||
