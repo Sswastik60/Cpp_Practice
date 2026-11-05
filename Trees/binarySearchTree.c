@@ -57,6 +57,78 @@ void preorderTraversal(struct Node* root) {
     preorderTraversal(root->right);
 }
 
+void searchNode(struct Node* root,int data){
+    if (root == NULL) {
+        printf("Data %d not found in the BST\n", data);
+        return;
+    }
+    else if (data < root->data) {
+        searchNode(root->left, data);
+    }
+    else if (data > root->data) {
+        searchNode(root->right, data);
+    }
+    else {
+        printf("Data %d found in the BST\n", data);
+    }
+}
+
+void deleteNode(struct Node* root,int data){
+    if (root == NULL){
+        printf("Data %d not found in the BST\n", data);
+        return;
+    }
+    else if (data <root->data){
+        deleteNode(root->left,data);
+    }
+    else if(data >root->data){
+        deleteNode(root->right,data);
+    }
+    else{
+        if(root->left==NULL && root->right==NULL){
+            free(root);
+            root=NULL;
+        }
+        else if(root->left==NULL){
+            struct Node* temp=root;
+            root=root->right;
+            free(temp);
+        }
+        else if(root->right==NULL){
+            struct Node* temp=root;
+            root=root->left;
+            free(temp);
+        }
+        else{
+            struct Node* temp=root->right;
+            while(temp->left!=NULL){
+                temp=temp->left;
+            }
+            root->data=temp->data;
+            deleteNode(root->right,temp->data);
+        }
+        //explaination : This case handles the deletion of a node with two children.
+        // It finds the inorder successor (smallest node in the right subtree) and
+        // replaces the node's data with the successor's data, then deletes the successor.
+    }
+}
+
+void minimumValueNode(struct Node* root) {
+    struct Node* current = root;
+    while(current->left != NULL) {
+        current = current->left;
+    }
+    printf("Minimum value in the BST is: %d\n", current->data);
+}
+
+void maximumValueNode(struct Node* root) {
+    struct Node* current = root;
+    while(current->right != NULL) {
+        current = current->right;
+    }
+    printf("Maximum value in the BST is: %d\n", current->data);
+}
+
 int main() {
     struct Node* root = NULL;
     root = insertNode(root, 50);
@@ -79,5 +151,9 @@ int main() {
     postorderTraversal(root);
     printf("\n");
 
+    searchNode(root, 40);
+    searchNode(root, 100);
+    minimumValueNode(root);
+    maximumValueNode(root);
     return 0;
 }
